@@ -80,7 +80,7 @@ const Index = () => {
                 <Button 
                   size="lg" 
                   variant="hero"
-                  onClick={() => navigate("/auth")}
+                  onClick={() => navigate("/signup-choice")}
                   className="animate-scale-in"
                 >
                   Get Started Free
@@ -165,7 +165,7 @@ const Index = () => {
             <Button 
               size="lg" 
               variant="secondary"
-              onClick={() => navigate("/auth")}
+              onClick={() => navigate("/signup-choice")}
               className="shadow-strong hover:shadow-medium"
             >
               Start Free Now

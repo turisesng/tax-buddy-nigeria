@@ -11,8 +11,22 @@ import {
   Calculator, 
   DollarSign,
   Plus,
-  Wallet
+  Wallet,
+  FileText,
+  Bell,
+  BookOpen,
+  BarChart3,
+  FileCheck,
+  MessageSquare,
+  Upload,
+  Download,
+  Users,
+  Receipt,
+  TrendingUpIcon,
+  Shield,
+  Building2
 } from "lucide-react";
+import { FeatureCard } from "@/components/FeatureCard";
 import { useToast } from "@/hooks/use-toast";
 import {
   Dialog,
@@ -27,6 +41,7 @@ interface Profile {
   id: string;
   user_type: "individual" | "business";
   full_name: string;
+  display_name: string | null;
   business_name: string | null;
 }
 
@@ -143,9 +158,11 @@ const Dashboard = () => {
               <Calculator className="h-5 w-5 text-white" />
             </div>
             <div>
-              <h1 className="text-xl font-bold">TaxBuddy</h1>
-              <p className="text-xs text-muted-foreground">
-                {profile?.business_name || profile?.full_name}
+              <h1 className="text-xl font-bold">
+                Welcome, {profile?.display_name || profile?.full_name}!
+              </h1>
+              <p className="text-xs text-muted-foreground capitalize">
+                {profile?.user_type} Account
               </p>
             </div>
           </div>
@@ -278,6 +295,246 @@ const Dashboard = () => {
             </CardContent>
           </Card>
         </div>
+
+        {/* Features Section */}
+        {profile?.user_type === "individual" ? (
+          <>
+            {/* Free Features for Individuals */}
+            <Card className="animate-fade-in">
+              <CardHeader>
+                <CardTitle>Free Features</CardTitle>
+                <CardDescription>
+                  Available tools to help you manage your taxes
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <FeatureCard
+                    icon={TrendingUpIcon}
+                    title="Smart Income Tracker"
+                    description="Log monthly income and basic expenses with automatic categorization"
+                  />
+                  <FeatureCard
+                    icon={Calculator}
+                    title="Basic Tax Estimator"
+                    description="Calculate estimated PIT using current FIRS/Nigerian tax bands"
+                  />
+                  <FeatureCard
+                    icon={FileCheck}
+                    title="Non-Taxable Income Certificate"
+                    description="Auto-generate proof of non-taxable status for income below ₦800k"
+                  />
+                  <FeatureCard
+                    icon={Bell}
+                    title="Reminders & Alerts"
+                    description="Monthly notifications for self-assessment filing or tax deadlines"
+                  />
+                  <FeatureCard
+                    icon={BookOpen}
+                    title="Learning Hub"
+                    description="Free access to bite-sized tax education tips, FAQ, and glossary"
+                  />
+                  <FeatureCard
+                    icon={Shield}
+                    title="Tax Reform Guidance"
+                    description="Explain new tax rules, exemptions, reliefs, and filing requirements"
+                  />
+                  <FeatureCard
+                    icon={BarChart3}
+                    title="Profile Dashboard"
+                    description="View total income logged, tax estimate, and compliance status"
+                  />
+                  <FeatureCard
+                    icon={Wallet}
+                    title="Budgeting & Expense Goals"
+                    description="Track spending vs. revenue to optimize taxable income"
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Premium Features for Individuals */}
+            <Card className="animate-fade-in border-accent/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  Premium Features
+                  <span className="text-xs font-semibold px-2 py-1 rounded-full bg-accent/20 text-accent">
+                    Upgrade
+                  </span>
+                </CardTitle>
+                <CardDescription>
+                  Unlock advanced tools for complete tax management
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <FeatureCard
+                    icon={Calculator}
+                    title="Smart Tax Calculator Pro"
+                    description="Advanced deductions: pension, NHF, life insurance, dependents"
+                    isPremium
+                  />
+                  <FeatureCard
+                    icon={FileText}
+                    title="Automated Tax Filing"
+                    description="Step-by-step guide to file directly with FIRS or state IRS portals"
+                    isPremium
+                  />
+                  <FeatureCard
+                    icon={MessageSquare}
+                    title="Personalized Tax Guidance"
+                    description="AI-based insights on reducing taxable income legally"
+                    isPremium
+                  />
+                  <FeatureCard
+                    icon={FileCheck}
+                    title="Tax History Report"
+                    description="Auto-generate yearly tax summary PDFs for applications"
+                    isPremium
+                  />
+                  <FeatureCard
+                    icon={BarChart3}
+                    title="Income Pattern Analysis"
+                    description="Charts showing monthly trends and highest-earning sources"
+                    isPremium
+                  />
+                  <FeatureCard
+                    icon={MessageSquare}
+                    title="Priority Support"
+                    description="Direct access to a tax advisor via chat or WhatsApp"
+                    isPremium
+                  />
+                  <FeatureCard
+                    icon={Upload}
+                    title="Document Upload & Storage"
+                    description="Upload receipts, invoices, and supporting tax documents"
+                    isPremium
+                  />
+                  <FeatureCard
+                    icon={Download}
+                    title="Export & Sharing"
+                    description="Export transactions, tax calculations, and reports as PDF or CSV"
+                    isPremium
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </>
+        ) : (
+          <>
+            {/* Free Features for Business */}
+            <Card className="animate-fade-in">
+              <CardHeader>
+                <CardTitle>Free Features</CardTitle>
+                <CardDescription>
+                  Essential tools for small business tax management
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <FeatureCard
+                    icon={TrendingUpIcon}
+                    title="Revenue & Expense Tracker"
+                    description="Input and categorize business income and costs with dashboard summary"
+                  />
+                  <FeatureCard
+                    icon={Calculator}
+                    title="Basic Tax Estimator"
+                    description="Estimate CIT and WHT for MSMEs with auto-detection of tax-exempt status"
+                  />
+                  <FeatureCard
+                    icon={Bell}
+                    title="Simple Compliance Reminder"
+                    description="Alerts for filing deadlines (VAT, PAYE, CIT, etc.)"
+                  />
+                  <FeatureCard
+                    icon={FileCheck}
+                    title="Micro-Business Exemption"
+                    description="Auto-generate tax exemption summary for turnover < ₦25M"
+                  />
+                  <FeatureCard
+                    icon={BookOpen}
+                    title="Educational Center"
+                    description="Free guides on VAT, PAYE remittance, and FIRS registration"
+                  />
+                </div>
+              </CardContent>
+            </Card>
+
+            {/* Premium Features for Business */}
+            <Card className="animate-fade-in border-accent/20">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  Premium Features
+                  <span className="text-xs font-semibold px-2 py-1 rounded-full bg-accent/20 text-accent">
+                    Upgrade
+                  </span>
+                </CardTitle>
+                <CardDescription>
+                  Professional tools for complete business tax compliance
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  <FeatureCard
+                    icon={FileText}
+                    title="Advanced Compliance Reports"
+                    description="Full reports on CIT, VAT, PAYE, WHT with breakdowns and due dates"
+                    isPremium
+                  />
+                  <FeatureCard
+                    icon={FileCheck}
+                    title="Automated Tax Filing Portal"
+                    description="Integrate with FIRS eTax or state portals for direct filing"
+                    isPremium
+                  />
+                  <FeatureCard
+                    icon={Building2}
+                    title="Multi-Branch Accounting"
+                    description="Manage revenues and taxes for multiple branches or subsidiaries"
+                    isPremium
+                  />
+                  <FeatureCard
+                    icon={Users}
+                    title="Payroll & PAYE Calculator"
+                    description="Auto-calculate PAYE per employee and generate remittance summaries"
+                    isPremium
+                  />
+                  <FeatureCard
+                    icon={Receipt}
+                    title="Invoice & Receipt Generator"
+                    description="Create branded invoices with automatic VAT computation"
+                    isPremium
+                  />
+                  <FeatureCard
+                    icon={BarChart3}
+                    title="Financial Health Dashboard"
+                    description="Visual charts for cash flow, revenue vs. expense, and tax ratio"
+                    isPremium
+                  />
+                  <FeatureCard
+                    icon={MessageSquare}
+                    title="Premium Business Support"
+                    description="1-on-1 advisory for tax compliance, audits, or expansion planning"
+                    isPremium
+                  />
+                  <FeatureCard
+                    icon={Upload}
+                    title="Document Upload & Storage"
+                    description="Upload receipts, invoices, and supporting tax documents"
+                    isPremium
+                  />
+                  <FeatureCard
+                    icon={Download}
+                    title="Export & Sharing"
+                    description="Export transactions, tax calculations, and reports as PDF or CSV"
+                    isPremium
+                  />
+                </div>
+              </CardContent>
+            </Card>
+          </>
+        )}
 
         {/* Recent Transactions */}
         <Card className="animate-fade-in">
